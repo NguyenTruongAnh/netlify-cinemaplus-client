@@ -143,15 +143,15 @@ export default function SingleMovie() {
                                     </button>
 
                                     {/* Save Movie Btn */}
-                                    {/* { !user && (
-                                        <Link className="link" to="/login" target='_blank'>
+                                    { !user && (
+                                        <Link className="link" to="/login">
                                             <button className="single-movie__btn single-movie__btn--save">
                                                 <i className="fas fa-save"></i>
                                                 Save
                                             </button>
                                         </Link>
                                         ) 
-                                    } */}
+                                    }
 
                                     { user && !user.savedMovies.includes(movieId) && (
                                         <button className="single-movie__btn single-movie__btn--save" onClick={handleSaveMovie}>
