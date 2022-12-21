@@ -1,0 +1,19 @@
+.profile {
+    min-height: 80vh;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.profile-wrapper {
+    background-color: var(--bg-color2);
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px var(--red-color);
+    margin-top: 40px;
+}

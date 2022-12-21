@@ -1,0 +1,10 @@
+.genre {
+    min-height: 100vh;
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    animation: fadeIn ease-in 0.8s;
+}
+
+
+

@@ -1,0 +1,104 @@
+.register {
+    color: var(--white-color);
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 40px;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.78),
+        rgba(0, 0, 0, 0.78)), 
+        url("../../assets/background/background_register.jpg");
+    background-size: cover;
+    animation: fadeIn linear 0.4s;
+}
+
+.register-wrapper {
+    background-color: var(--bg-color2);
+    padding: 40px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-title {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-input {
+    width: 260px;
+    outline: none;
+    border: none;
+    color: var(--input-color);
+    font-size: 1.6rem;
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+}
+
+.register button { 
+    font-size: 1.4rem;
+    font-weight: 600;
+    height: 38px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    color: var(--white-color);
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.register-btn {
+    width: 100%;
+    background-color: var(--main-color);
+    transition: background-color 0.2s;
+}
+
+.register-btn:hover {
+    background-color: var(--main-color-hover);
+}
+
+.register-divide {
+    border-top: 1px solid #4a4a4a;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.register-divide > span {
+    display: block;
+    position: absolute;
+    background-color: var(--bg-color2);
+    color: var(--text-color1);
+    font-size: 1.4rem;
+    padding: 0 4px;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-50%);
+}
+
+.facebook-btn {
+    background-color: rgb(59, 89, 152);
+    transition: background-color 0.2s;
+}
+
+.facebook-btn:hover {
+    background-color: rgb(31, 70, 150);
+}
+
+.google-btn {
+    background-color: rgb(221, 75, 57);
+    transition: background-color 0.2s;
+}
+
+.google-btn:hover {
+    background-color: rgb(221, 46, 24);
+}

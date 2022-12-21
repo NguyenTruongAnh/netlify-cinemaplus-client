@@ -1,0 +1,28 @@
+.movies {
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 0px;
+}
+
+.movies__category {
+    display: inline-block;
+    color: var(--white-color);
+    font-size: 3rem;
+    line-height: 3rem;
+    margin: 0;
+    margin-bottom: 28px;
+    margin-left: 8px;
+    position: relative;
+}
+
+.movies__category::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 4px;
+    border-radius: 2px;
+    bottom: -6px;
+    background-color: var(--main-color);
+    transition: width 0.2s;
+}

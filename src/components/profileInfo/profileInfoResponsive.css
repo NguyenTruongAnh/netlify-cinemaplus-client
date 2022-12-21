@@ -1,0 +1,24 @@
+/* Movile and Tablet */
+@media (max-width: 1023px) {
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+}
+
+/* Movile */
+@media (max-width: 739px) {
+    .profile-info {
+        margin-bottom: 40px;
+    }
+
+    .profile-info__btn {
+        /* top: auto;
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 20px; */
+        position: relative;
+    }
+}

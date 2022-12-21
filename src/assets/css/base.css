@@ -1,0 +1,72 @@
+:root {
+    --main-color: #e50914;
+    --main-color-hover: #960007;
+
+    --red-color: red;
+    --white-color: #fff;
+    --black-color: #000;
+
+    --text-color: #8c8c8c;
+    --text-color1: #505050;
+    --input-color: #868686;
+    --label-color: #e0e0e0;
+
+    --bg-color1: #111;
+    --bg-color2: #222;
+    --bg-color3: #333;
+    --bg-color4: #444;
+
+    --header-height: 80px;
+
+    --line-height-text: 2.2rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    border-radius: 10px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growth {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes dropDown {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}

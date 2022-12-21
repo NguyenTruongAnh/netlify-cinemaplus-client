@@ -1,0 +1,135 @@
+.profile-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+.profile-edit__wrapper {
+    width: 90%;
+    max-width: 600px;
+    max-height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--bg-color3);
+    margin: 0 10px;
+    padding: 10px 0;
+    border-radius: 12px;
+    position: relative;
+    border: 1px solid var(--red-color);
+    box-shadow: 0px 0px 10px var(--red-color);
+    transform-origin: top;
+    animation: growth ease-in 0.2s;
+    will-change: scale;
+}
+
+.profile-edit__btn-close {
+    position: absolute;
+    padding: 10px;
+    font-size: 3.2rem;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.profile-edit__btn-close:hover {
+    color: var(--white-color);
+}
+
+.profile-edit__avatar {
+    justify-content: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+.profile-edit__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--red-color);
+    object-fit: cover;
+}
+
+.profile-edit__file {
+    display: none;
+}
+
+.profile-edit__icon {
+    background-color: var(--bg-color4);
+    padding: 8px 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.profile-edit__icon:hover {
+    background-color: var(--black-color);
+}
+
+.profile-edit__list {
+    margin: 20px 10px;
+    height: 220px;
+    overflow-y: auto;
+}
+
+.profile-edit__list::-webkit-scrollbar {
+    width: 2px;
+}
+
+.profile-edit__list::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+   
+.profile-edit__list::-webkit-scrollbar-thumb {
+    background: var(--main-color); 
+    border-radius: 10px;
+}
+
+.profile-edit__item {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.profile-edit__item input,
+.profile-edit__item select {
+    width: 100%;
+    height: 36px;
+    padding: 4px 10px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: none;
+    color: var(--input-color);
+    outline: none;
+}
+
+.profile-edit__btn-update {
+    font-size: 1.6rem;
+    padding: 12px 30px;
+    border-radius: 8px;
+    color: var(--white-color);
+    background-color: var(--main-color);
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.profile-edit__btn-update:hover {
+    background-color: var(--main-color-hover);
+}

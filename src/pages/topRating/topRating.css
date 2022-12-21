@@ -1,0 +1,30 @@
+.top-rating {
+    min-height: 100vh;
+    margin-top: 20px;
+    width: 100%;
+    color: white;
+    animation: fadeIn ease-in 0.4s;
+}
+
+.loading-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.btn-loading {
+    padding: 10px 20px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-loading:hover {
+    background-color: var(--main-color-hover);
+    
+}

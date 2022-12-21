@@ -1,0 +1,11 @@
+.home {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #111; */
+    background-color: #000;
+    margin-bottom: 40px;
+    animation: fadeIn ease-in 0.4s;
+}

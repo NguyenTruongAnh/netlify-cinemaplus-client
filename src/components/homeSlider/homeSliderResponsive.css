@@ -1,0 +1,18 @@
+/* Mobile */
+@media (max-width: 739px) {
+    .home-slider {
+        margin-top: 0;
+    }
+
+    .home-slider__list .slick-dots {
+        z-index: 2;
+        bottom: 0;
+    }
+
+    .home-slider__list .slick-dots button {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}

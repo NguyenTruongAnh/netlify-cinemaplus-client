@@ -1,0 +1,46 @@
+/* Movile and Tablet */
+@media (max-width: 1023px) {
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+}
+
+/* Movile */
+@media (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .profile-sidebar {
+        margin-bottom: 20px;
+    }
+
+    .profile-sidebar::before {
+        display: none;
+    }
+    
+    .profile-sidebar__item {
+        padding: 10px 0;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .profile-sidebar__item.active::before {
+        display: none;
+    }
+
+    .profile-sidebar__item.active::after {
+        display: block;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 8px;
+        background-color: var(--main-color);
+    }
+}

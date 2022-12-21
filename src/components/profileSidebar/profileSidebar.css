@@ -1,0 +1,48 @@
+.profile-sidebar {
+    width: 100%;
+    padding: 4px 0;
+    position: relative;
+}
+
+.profile-sidebar::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    width: 2px;
+    background-color: var(--text-color);
+}
+
+.profile-sidebar__item {
+    padding: 16px 20px;
+    font-weight: 400;
+    font-size: 1.4rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-sidebar__item.active {
+    color: var(--red-color);
+}
+
+.profile-sidebar__item.active::before {
+    display: block;
+    content: "";
+    position: absolute;
+    border-radius: 8px;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: var(--red-color);
+}
+
+.profile-sidebar__item:hover {
+    color: var(--red-color);
+}
+
+.profile-sidebar__item > i {
+    margin-right: 10px;
+}

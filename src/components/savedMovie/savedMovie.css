@@ -1,0 +1,87 @@
+.saved-movie {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.saved-movie__wrapper {
+    flex: 1;
+    display: flex;
+    color: #8c8c8c;
+    margin-bottom: 16px;
+    box-shadow: 2px 2px 4px var(--main-color);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.saved-movie__info {
+    cursor: pointer;
+    flex: 1;
+}
+
+.saved-movie__info a {
+    display: flex;
+    align-items: center;
+}
+
+.saved-movie__info:hover .saved-movie__title {
+    color: var(--main-color);
+}
+
+.saved-movie__img {
+    width: 80px;
+    object-fit: cover;
+}
+
+.saved-movie__title {
+    padding-right: 4px;
+    flex: 1;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-left: 8px;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 2rem;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize; */
+}
+
+.saved-movie__btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.saved-movie__btns a {
+    width: 100%;
+}
+
+.saved-movie__btns button {
+    width: 100%;
+    color: var(--white-color);
+    padding: 4px 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    font-size: 1.4rem;
+    outline: none;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.saved-movie__view {
+    border: 2px solid rgb(6, 211, 16);
+}
+
+.saved-movie__view:hover {
+    color: rgb(6, 211, 16);
+}
+
+.saved-movie__delete {
+    border: 2px solid red;
+}
+
+.saved-movie__delete:hover {
+    color: red;
+}
