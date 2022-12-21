@@ -11,9 +11,9 @@ export const MOVIES_SIMILAR_API_FOOTER = "/similar?api_key=8236021ba55b887610bd2
 
 export const MOVIE_DETAIL_API = "https://api.themoviedb.org/3/movie/"
 export const API_KEY = "?api_key=8236021ba55b887610bd298e392efdb6&language=en"
-export const MOVIE_IMAGE_API = "http://image.tmdb.org/t/p/w500"
+export const MOVIE_IMAGE_API = "http://image.tmdb.org/t/p/w500/"
 
-export const MOVIE_BACKDROP_API = "http://image.tmdb.org/t/p/w1280"
+export const MOVIE_BACKDROP_API = "http://image.tmdb.org/t/p/w1280/"
 
 export const MOVIE_SRC_API = "https://www.2embed.ru/embed/tmdb/movie?id="
 
