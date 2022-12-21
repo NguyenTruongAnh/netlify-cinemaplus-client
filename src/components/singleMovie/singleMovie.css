@@ -16,7 +16,7 @@
     background-position: center center;
     opacity: 0.3;
     z-index: -1;
-    background-color: red;
+    background-color: var(--black-color);
 }
 
 .single-movie__src {
