@@ -144,7 +144,7 @@ export default function SingleMovie() {
 
                                     {/* Save Movie Btn */}
                                     { !user && (
-                                        <Link className="link" to="/login">
+                                        <Link className="link" to="/login" target='_blank'>
                                             <button className="single-movie__btn single-movie__btn--save">
                                                 <i className="fas fa-save"></i>
                                                 Save
