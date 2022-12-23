@@ -17,6 +17,10 @@
     background: linear-gradient(to top, #000, transparent);
 }
 
+.home-slider__list { 
+    overflow: hidden;
+}
+
 .home-slider__list .slick-slide.slick-active {
     z-index: 1;
 }
@@ -42,7 +46,7 @@
 .home-slider__list .slick-dots button::before {
     content: "";
     line-height: unset;
-    background-color: #fff !important;
+    background-color: var(--white-color) !important;
     opacity: 0.25 !important;
     top: 0;
     left: 0;
@@ -51,8 +55,52 @@
 }
 
 .home-slider__list .slick-dots .slick-active button::before {
-    background-color: red !important;
+    background-color: var(--main-color) !important;
     opacity: 1 !important;
+}
+
+.home-slider__list .slick-arrow {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 80px;
+    z-index: 999;
+    opacity: 0.5;
+    border-radius: 4px;
+    transition: all ease 0.2s;
+}
+
+.home-slider__list .slick-arrow:hover {
+    opacity: 0.8;
+}
+
+.home-slider__list .slick-arrow::before {
+    display: none;
+}
+
+.home-slider__list .slick-arrow i {
+    font-size: 32px;
+    color: white;
+}
+
+.home-slider__list .slick-prev {
+    justify-content: flex-start;
+    left: 5px;
+    background: linear-gradient(to right, var(--main-color), transparent);
+}
+
+.home-slider__list .slick-prev i {
+    margin-left: 6px;
+}
+
+.home-slider__list .slick-next {
+    justify-content: flex-end;
+    right: 5px;
+    background: linear-gradient(to left, var(--main-color), transparent);
+}
+
+.home-slider__list .slick-next i {
+    margin-right: 6px;
 }
 
 

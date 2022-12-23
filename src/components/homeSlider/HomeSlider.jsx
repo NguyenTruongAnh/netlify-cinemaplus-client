@@ -9,17 +9,51 @@ import HomeSliderItem from '../homeSliderItem/HomeSliderItem'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
+function SamplePrevArrow(props) {
+    const { className, onClick } = props;
+    return (
+        <div
+            className={className}
+            onClick={onClick}
+        >
+            <i className="fa-solid fa-chevron-left"></i>
+        </div>
+    );
+}
+
+function SampleNextArrow(props) {
+    const { className, onClick } = props;
+    return (
+        <div
+            className={className}
+            onClick={onClick}
+        >
+            <i className="fa-solid fa-chevron-right"></i>
+        </div>
+    );
+}
+
 export default function HomeSlider() {
     const settings = {
         dots: true,
         infinite: true,
-        arrows: false,
+        arrows: true,
         fade: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 4000,
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+                breakpoint: 600,
+                settings: {
+                    arrows: false,
+                }
+            },
+        ]
     }
 
     const [movies, setMovies] = useState([])
