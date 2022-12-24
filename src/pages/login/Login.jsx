@@ -27,7 +27,6 @@ export default function Login() {
                     password: password
                 })
 
-                console.log(res.data)
                 if (res.status === 200) {
                     dispatch(userSlice.actions.loginSuccess(res.data))
                 } else {
