@@ -30,8 +30,6 @@ function App() {
     localStorage.setItem("userCinema", JSON.stringify(user));
   }, [user])
 
-  console.log(user);
-
   return (
     <Router>
       <Header />
