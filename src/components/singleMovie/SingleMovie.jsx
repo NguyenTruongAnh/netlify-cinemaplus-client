@@ -2,11 +2,13 @@ import './singleMovie.css'
 import './singleMovieResponsive.css'
 import MovieSimilar from '../movieSimilar/MovieSimilar'
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../loading/Loading'
-import { Context } from '../../context/Context'
+import { useSelector, useDispatch } from 'react-redux'
+import { userInfoSelector } from '../../redux/selectors'
+import userSlice from '../../redux/userSlice'
 
 export default function SingleMovie() {
     const { movieId } = useParams()
@@ -14,7 +16,8 @@ export default function SingleMovie() {
     const [play, setPlay] = useState(false)
     const [isloading, setIsLoading] = useState(false)
 
-    const { user, dispatch } = useContext(Context)
+    const user = useSelector(userInfoSelector)
+    const dispatch = useDispatch()
 
     useEffect(() => { 
         let source = axios.CancelToken.source();
@@ -48,9 +51,9 @@ export default function SingleMovie() {
     }
 
     const handleSaveMovie = async () => {
-        dispatch({type:"UPDATE_START"})
+        dispatch(userSlice.actions.updateStart())
 
-        const newSavedMovies = user.savedMovies
+        const newSavedMovies = [...user.savedMovies]
         newSavedMovies.push(movieId.toString())
 
         const updatedUser = {
@@ -61,9 +64,13 @@ export default function SingleMovie() {
         try {
             const res = await axios.put("/users/" + user._id, updatedUser)
 
-            dispatch({type:"UPDATE_SUCCESS", payload: res.data })
+            if (res.status === 200) {
+                dispatch(userSlice.actions.updateSuccess(res.data))
+            } else {
+                dispatch(userSlice.actions.updateFailure(res.data))
+            }
         } catch(err) {
-            dispatch({type:"UPDATE_FAILURE"})
+            dispatch(userSlice.actions.updateFailure("Error, please try again"))
         }
     }
 

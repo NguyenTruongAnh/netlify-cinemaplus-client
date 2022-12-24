@@ -133,3 +133,8 @@
 .profile-edit__btn-update:hover {
     background-color: var(--main-color-hover);
 }
+
+.profile-edit__btn-update:disabled {
+    background-color: var(--main-color-light);
+    cursor: no-drop;
+}

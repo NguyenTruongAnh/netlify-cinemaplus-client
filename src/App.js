@@ -1,9 +1,9 @@
 import './assets/css/base.css';
 import './assets/css/grid.css';
 
-import { useContext } from 'react'
-import { Context } from './context/Context'
-
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { userInfoSelector } from './redux/selectors';
 
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -24,7 +24,13 @@ import Search from './pages/search/Search';
 import Genre from './pages/genre/Genre';
 
 function App() {
-  const { user } = useContext(Context);
+  const user = useSelector(userInfoSelector);
+
+  useEffect(() => {
+    localStorage.setItem("userCinema", JSON.stringify(user));
+  }, [user])
+
+  console.log(user);
 
   return (
     <Router>

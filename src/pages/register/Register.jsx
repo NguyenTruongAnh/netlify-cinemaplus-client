@@ -8,7 +8,8 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState(false)
+    const [error, setError] = useState("")
+    const [success, setSuccess] = useState("")
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -16,18 +17,43 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setError(false)
-        try {
-            const res = await axios.post("/auth/register", {
-                username,
-                email,
-                phone,
-                password,
-            })
 
-            res.data && window.location.replace("/login")
-        } catch(err) {
-            setError(true)
+        if (username && email && phone && password) {
+            try {
+                const res = await axios.post("/auth/register", {
+                    username,
+                    email,
+                    phone,
+                    password,
+                })
+
+                if (res.status === 200) {
+                    // res.data && window.location.replace("/login")
+                    setUsername("")
+                    setEmail("")
+                    setPhone("")
+                    setPassword("")
+                    setSuccess("Register successfully")
+                    setTimeout(() => {
+                        setSuccess("")
+                    }, 1000)
+                } else {
+                    setError("Register failure, please try again")
+                    setTimeout(() => {
+                        setError('')
+                    }, 1000)
+                }
+            } catch (err) {
+                setError("Register failure, please try again")
+                setTimeout(() => {
+                    setError('')
+                }, 1000)
+            }
+        } else {
+            setError("Please fill in all the infomation")
+            setTimeout(() => {
+                setError('')
+            }, 1000)
         }
     }
 
@@ -38,39 +64,73 @@ export default function Login() {
             </h2>
             <div className="register-wrapper">
                 <form action="#" className="register-form" onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        className="register-input" 
-                        placeholder="Enter username..." 
-                        onChange={(e)=>setUsername(e.target.value)}
+                    <input
+                        type="text"
+                        className="register-input"
+                        placeholder="Enter username..."
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
 
-                    <input 
-                        type="email" 
-                        className="register-input" 
-                        placeholder="Enter email..." 
+                    <input
+                        type="email"
+                        className="register-input"
+                        placeholder="Enter email..."
                         autoComplete="off"
-                        onChange={(e)=>setEmail(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <input 
-                        type="text" 
-                        className="register-input" 
-                        placeholder="Enter phone..." 
+                    <input
+                        type="text"
+                        className="register-input"
+                        placeholder="Enter phone..."
                         autoComplete="off"
-                        onChange={(e)=>setPhone(e.target.value)}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                     />
 
-                    <input 
-                        type="password" 
-                        className="register-input" 
-                        placeholder="Enter password..." 
-                        onChange={(e)=>setPassword(e.target.value)}
+                    <input
+                        type="password"
+                        className="register-input"
+                        placeholder="Enter password..."
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
+
+                    {error && (
+                        <span
+                            style={
+                                {
+                                    display: "block",
+                                    width: "100%",
+                                    textAlign: 'center',
+                                    fontSize: "1.6rem",
+                                    marginBottom: "12px",
+                                    color: "red",
+                                }}
+                        >
+                            {error}
+                        </span>
+                    )}
+
+                    {success && (
+                        <span
+                            style={
+                                {
+                                    display: "block",
+                                    width: "100%",
+                                    textAlign: 'center',
+                                    fontSize: "1.6rem",
+                                    marginBottom: "12px",
+                                    color: "green",
+                                }}
+                        >
+                            {success}
+                        </span>
+                    )}
 
                     <button className="register-btn">Register</button>
-
-                    {error && <span style={{color:'red', fontSize:'1.2rem'}}>Username or Email or Phone has been used</span>}
                 </form>
 
                 {/* <p className="register-divide">

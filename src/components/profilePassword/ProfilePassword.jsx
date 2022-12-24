@@ -23,13 +23,17 @@ export default function ProfilePassword({ user }) {
                 }
 
                 try {
-                    await axios.put("/users/change-password/" + user._id, updatedUser)
+                    const res = await axios.put("/users/change-password/" + user._id, updatedUser)
 
-                    setErrorMess("")
-                    setSuccessMess("Change password successfully")
-                    setCurrPassword("")
-                    setNewPassword("")
-                    setRepeatPassword("")
+                    if (res.status === 200) {
+                        setErrorMess("")
+                        setSuccessMess("Change password successfully")
+                        setCurrPassword("")
+                        setNewPassword("")
+                        setRepeatPassword("")
+                    } else {
+                        setErrorMess("Change password failure, please try again")
+                    }
                 } catch(err) {
                     setErrorMess("Your old password is incorrect")
                 }

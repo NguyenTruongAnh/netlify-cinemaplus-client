@@ -2,12 +2,13 @@ import './header.css'
 import './headerResponsive.css'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { Context } from '../../context/Context'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { userInfoSelector } from '../../redux/selectors'
 
 export default function Header() {
-    const { user } = useContext(Context);
+    const user = useSelector(userInfoSelector);
 
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [isOpenMenu, setIsOpenMenu] = useState(false);

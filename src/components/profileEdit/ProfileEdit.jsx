@@ -3,6 +3,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage"
 import app from '../../config/firebase'
+import { useSelector } from 'react-redux'
+import { userSelector } from '../../redux/selectors'
+import userSlice from '../../redux/userSlice'
 const storage = getStorage(app)
 const defaultImage = "https://firebasestorage.googleapis.com/v0/b/cinema-plus-f585b.appspot.com/o/default-picture.png?alt=media&token=f3cb4fe9-c276-4ae9-8cf5-7428e805823b"
 
@@ -14,9 +17,10 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
     const [gender, setGender] = useState(user.gender)
     const [region, setRegion] = useState(user.region)
     const [file, setFile] = useState(null)
+    const [isFill, setIsFill] = useState(true)
+    const [isSuccess, setIsSuccess] = useState(false)
 
-    const [error, setError] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const { error, isFetching } = useSelector(userSelector)
 
     const current = new Date();
     const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
@@ -25,7 +29,7 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
         e.preventDefault();
 
         if (displayName && phone && email && birthdate && gender && region) {
-            dispatch({ type: "UPDATE_START" })
+            dispatch(userSlice.actions.updateStart())
 
             const updatedUser = {
                 userId: user._id,
@@ -51,18 +55,20 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
             try {
                 const res = await axios.put("/users/" + user._id, updatedUser)
 
-                dispatch({ type: "UPDATE_SUCCESS", payload: res.data })
-                setError(false)
-                setSuccess(true)
-                setTimeout(() => {
-                    setSuccess(false)
-                }, 1000)
+                if (res.status === 200) {
+                    dispatch(userSlice.actions.updateSuccess(res.data))
+                    setIsSuccess(true)
+                    setTimeout(() => {
+                        setIsSuccess(false)
+                    }, 1000)
+                } else {
+                    dispatch(userSlice.actions.updateFailure(res.data))
+                }
             } catch (err) {
-                dispatch({ type: "UPDATE_FAILURE" })
+                dispatch(userSlice.actions.updateFailure("Update error, please try again."))
             }
-
         } else {
-            setError(true)
+            setIsFill(false)
         }
     }
 
@@ -186,7 +192,7 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
                     </div>
                 </div>
 
-                {error &&
+                {!isFill &&
                     <span
                         style={
                             {
@@ -201,7 +207,22 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
                     </span>
                 }
 
-                {success &&
+                {error &&
+                    <span
+                        style={
+                            {
+                                display: "block",
+                                width: "100%",
+                                textAlign: 'center',
+                                fontSize: "1.6rem",
+                                color: "red",
+                            }}
+                    >
+                        {error}
+                    </span>
+                }
+
+                {isSuccess &&
                     <span
                         style={
                             {
@@ -219,6 +240,7 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
                 <button
                     className="profile-edit__btn-update"
                     type="submit"
+                    disabled={isFetching}
                 >
                     Update
                 </button>

@@ -1,14 +1,17 @@
 import './login.css'
 import { Link } from 'react-router-dom'
-import { useEffect, useRef, useContext, useState } from 'react'
-import { Context } from '../../context/Context'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { userSelector } from '../../redux/selectors'
+import userSlice from '../../redux/userSlice'
 
 export default function Login() {
-    const userRef = useRef()
-    const passwordRef = useRef()
-    const { dispatch } = useContext(Context)
-    const [error, setError] = useState(false)
+    const { error, isFetching } = useSelector(userSelector)
+    const dispatch = useDispatch()
+    const [isFill, setIsFill] = useState(true)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -16,18 +19,28 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch({type:"LOGIN_START"})
-        try {
-            const res = await axios.post("/auth/login", {
-                username: userRef.current.value, 
-                password: passwordRef.current.value
-            })
+        if (username && password) {
+            dispatch(userSlice.actions.loginStart())
+            try {
+                const res = await axios.post("/auth/login", {
+                    username: username,
+                    password: password
+                })
 
-            dispatch({type:"LOGIN_SUCCESS", payload: res.data})
-        } catch(err) {
-            dispatch({type:"LOGIN_FAILURE"})
-
-            setError(true)
+                console.log(res.data)
+                if (res.status === 200) {
+                    dispatch(userSlice.actions.loginSuccess(res.data))
+                } else {
+                    dispatch(userSlice.actions.loginFailure(res.data))
+                }
+            } catch (err) {
+                dispatch(userSlice.actions.loginFailure("Login error, please try again."))
+            }
+        } else {
+            setIsFill(false)
+            setTimeout(() => {
+                setIsFill(true)
+            }, 2000)
         }
     }
 
@@ -38,37 +51,56 @@ export default function Login() {
             </h2>
             <div className="login-wrapper">
                 <form action="#" className="login-form" onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        className="login-input" 
-                        placeholder="Enter username..." 
-                        ref={userRef}
+                    <input
+                        type="text"
+                        className="login-input"
+                        placeholder="Enter username..."
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
 
-                    <input 
-                        type="password" 
-                        className="login-input" 
-                        placeholder="Enter password..." 
-                        ref={passwordRef}
+                    <input
+                        type="password"
+                        className="login-input"
+                        placeholder="Enter password..."
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <button className="login-btn" type="submit">Login</button>
+                    {!isFill &&
+                        <span
+                            style={
+                                {
+                                    display: "block",
+                                    width: "100%",
+                                    textAlign: 'center',
+                                    fontSize: "1.6rem",
+                                    color: "red",
+                                    marginBottom: "12px",
+                                }}
+                        >
+                            Please fill in all the infomation
+                        </span>
+                    }
+
+                    <button className="login-btn" type="submit" disabled={isFetching}>Login</button>
                     {/* <span className="login-forgot-password">Forgot password?</span> */}
                 </form>
 
-                {error && 
+                {error &&
                     <span
                         style={
-                            { 
-                                width:"100%",
-                                display:"block",
-                                textAlign:"center",
-                                fontSize:"1.2rem",
-                                color:"red"
+                            {
+                                width: "100%",
+                                display: "block",
+                                textAlign: "center",
+                                fontSize: "1.2rem",
+                                color: "red"
                             }
                         }
                     >
-                        Username or password is not true
+                        {/* Username or password is not true */}
+                        {error}
                     </span>
                 }
 

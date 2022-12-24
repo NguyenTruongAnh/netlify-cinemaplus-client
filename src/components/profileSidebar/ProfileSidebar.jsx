@@ -2,14 +2,13 @@ import './profileSidebar.css'
 import './profileSidebarResponsive.css'
 import { Link } from 'react-router-dom';
 
-import { useContext } from 'react'
-import { Context } from '../../context/Context'
+import userSlice from '../../redux/userSlice';
 
-export default function ProfileSidebar({ infoView, setInfoView }) {
-    const { dispatch } = useContext(Context)
+export default function ProfileSidebar({ infoView, setInfoView, dispatch }) {
+
 
     const handleLogout = () => {
-        dispatch({ type:"LOGOUT" })
+        dispatch(userSlice.actions.logout())
     }
 
     return (
