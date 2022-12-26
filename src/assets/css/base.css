@@ -2,6 +2,7 @@
     --main-color: #e50914;
     --main-color-hover: #960007;
     --main-color-light: #f0555d;
+    --main-color-bold: #8a0007;
 
     --red-color: red;
     --white-color: #fff;
@@ -16,10 +17,20 @@
     --bg-color2: #222;
     --bg-color3: #333;
     --bg-color4: #444;
+    --bg-color5: #555;
+    --bg-color6: #666;
+    --bg-color7: #777;
+    --bg-color8: #888;
+    --bg-color9: #999;
+
 
     --header-height: 80px;
 
     --line-height-text: 2.2rem;
+}
+
+* {
+    letter-spacing: 0.5px;
 }
 
 /* width */
@@ -42,11 +53,25 @@
 /* Animation */
 @keyframes fadeIn {
     from {
+        visibility: visible;
         opacity: 0;
     }
 
     to {
+        visibility: visible;
         opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    to {
+        visibility: hidden;
+        opacity: 0;
     }
 }
 

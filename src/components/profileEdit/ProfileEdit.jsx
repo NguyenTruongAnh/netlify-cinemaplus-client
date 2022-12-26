@@ -1,5 +1,5 @@
 import './profileEdit.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage"
 import app from '../../config/firebase'
@@ -24,6 +24,16 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
 
     const current = new Date();
     const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`;
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (isSuccess) { 
+                setIsSuccess(false)
+            }
+        }, 1000)
+
+        return () => clearTimeout(timeout)
+    }, [isSuccess])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,14 +68,11 @@ export default function ProfileEdit({ edit, setEdit, user, dispatch }) {
                 if (res.status === 200) {
                     dispatch(userSlice.actions.updateSuccess(res.data))
                     setIsSuccess(true)
-                    setTimeout(() => {
-                        setIsSuccess(false)
-                    }, 1000)
                 } else {
                     dispatch(userSlice.actions.updateFailure(res.data))
                 }
             } catch (err) {
-                dispatch(userSlice.actions.updateFailure("Update error, please try again."))
+                dispatch(userSlice.actions.updateFailure(err.response.data))
             }
         } else {
             setIsFill(false)

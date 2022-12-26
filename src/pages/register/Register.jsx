@@ -15,6 +15,20 @@ export default function Login() {
         window.scrollTo(0, 0)
     }, [])
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (error) {
+                setError("")
+            }
+
+            if (success) {
+                setSuccess("")
+            }
+        }, 3000)
+
+        return () => clearTimeout(timeout)
+    }, [error, success])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -33,27 +47,15 @@ export default function Login() {
                     setEmail("")
                     setPhone("")
                     setPassword("")
-                    setSuccess("Register successfully")
-                    setTimeout(() => {
-                        setSuccess("")
-                    }, 1000)
+                    setSuccess(res.data)
                 } else {
-                    setError("Register failure, please try again")
-                    setTimeout(() => {
-                        setError('')
-                    }, 1000)
+                    setError(res.data)
                 }
             } catch (err) {
-                setError("Register failure, please try again")
-                setTimeout(() => {
-                    setError('')
-                }, 1000)
+                setError(err.response.data)
             }
         } else {
             setError("Please fill in all the infomation")
-            setTimeout(() => {
-                setError('')
-            }, 1000)
         }
     }
 
@@ -103,7 +105,7 @@ export default function Login() {
                             style={
                                 {
                                     display: "block",
-                                    width: "100%",
+                                    width: "260px",
                                     textAlign: 'center',
                                     fontSize: "1.6rem",
                                     marginBottom: "12px",
@@ -119,7 +121,7 @@ export default function Login() {
                             style={
                                 {
                                     display: "block",
-                                    width: "100%",
+                                    width: "260px",
                                     textAlign: 'center',
                                     fontSize: "1.6rem",
                                     marginBottom: "12px",

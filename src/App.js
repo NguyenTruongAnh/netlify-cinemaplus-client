@@ -17,7 +17,7 @@ import TopRating from './pages/topRating/TopRating';
 
 import {
   BrowserRouter as Router,
-  Routes ,
+  Routes,
   Route
 } from "react-router-dom";
 import Search from './pages/search/Search';
@@ -73,12 +73,12 @@ function App() {
         <Route
           path="/movies/:movieId"
           element={<Single />}
-        />    
+        />
 
         <Route
           path="/movies/search/:movieTerm"
           element={<Search />}
-        />    
+        />
 
       </Routes>
       <Footer />

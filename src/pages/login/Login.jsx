@@ -17,6 +17,16 @@ export default function Login() {
         window.scrollTo(0, 0)
     }, [])
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (!isFill) {
+                setIsFill(true)
+            }
+        }, 2000)
+
+        return () => clearTimeout(timeout)
+    }, [isFill])
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (username && password) {
@@ -33,13 +43,10 @@ export default function Login() {
                     dispatch(userSlice.actions.loginFailure(res.data))
                 }
             } catch (err) {
-                dispatch(userSlice.actions.loginFailure("Login error, please try again."))
+                dispatch(userSlice.actions.loginFailure(err.response.data))
             }
         } else {
             setIsFill(false)
-            setTimeout(() => {
-                setIsFill(true)
-            }, 2000)
         }
     }
 
@@ -73,7 +80,7 @@ export default function Login() {
                                     display: "block",
                                     width: "100%",
                                     textAlign: 'center',
-                                    fontSize: "1.6rem",
+                                    fontSize: "1.4rem",
                                     color: "red",
                                     marginBottom: "12px",
                                 }}
@@ -82,26 +89,27 @@ export default function Login() {
                         </span>
                     }
 
+                    {error &&
+                        <span
+                            style={
+                                {
+                                    width: "100%",
+                                    display: "block",
+                                    textAlign: "center",
+                                    fontSize: "1.4rem",
+                                    color: "red",
+                                    marginBottom: "12px",
+                                }
+                            }
+                        >
+                            {/* Username or password is not true */}
+                            {error}
+                        </span>
+                    }
+
                     <button className="login-btn" type="submit" disabled={isFetching}>Login</button>
                     {/* <span className="login-forgot-password">Forgot password?</span> */}
                 </form>
-
-                {error &&
-                    <span
-                        style={
-                            {
-                                width: "100%",
-                                display: "block",
-                                textAlign: "center",
-                                fontSize: "1.2rem",
-                                color: "red"
-                            }
-                        }
-                    >
-                        {/* Username or password is not true */}
-                        {error}
-                    </span>
-                }
 
                 {/* <p className="login-divide">
                     <span>or</span>

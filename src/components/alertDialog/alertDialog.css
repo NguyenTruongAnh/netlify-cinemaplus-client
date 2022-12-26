@@ -1,0 +1,25 @@
+.MuiDialog-root {
+    color: var(--black-color);
+}
+
+.MuiDialog-root h2 {
+    color: var(--black-color);
+    font-size: 2rem;
+    letter-spacing: 0.5px !important;
+}
+
+.MuiDialog-root p,
+.MuiDialog-root button {
+    color: var(--black-color);
+    font-size: 1.4rem;
+    letter-spacing: 0.5px !important;
+}
+
+.MuiDialog-root button:hover {
+    color: var(--main-color);
+}
+
+.MuiDialog-root .MuiPaper-root {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+}

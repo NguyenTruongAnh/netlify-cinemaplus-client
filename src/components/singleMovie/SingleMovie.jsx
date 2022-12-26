@@ -9,32 +9,34 @@ import Loading from '../loading/Loading'
 import { useSelector, useDispatch } from 'react-redux'
 import { userInfoSelector } from '../../redux/selectors'
 import userSlice from '../../redux/userSlice'
+import Comments from '../comments/Comments'
 
 export default function SingleMovie() {
     const { movieId } = useParams()
     const [movie, setMovie] = useState({})
     const [play, setPlay] = useState(false)
     const [isloading, setIsLoading] = useState(false)
+    const [alertMessage, setAlertMessage] = useState('')
 
     const user = useSelector(userInfoSelector)
     const dispatch = useDispatch()
 
-    useEffect(() => { 
+    useEffect(() => {
         let source = axios.CancelToken.source();
-        
+
         const fetchMovie = async () => {
             try {
                 window.scrollTo(0, 0)
                 setIsLoading(true)
-                const res = await axios.get(`/movies/${movieId}`, {cancelToken: source.token})
+                const res = await axios.get(`/movies/${movieId}`, { cancelToken: source.token })
                 setMovie(res.data)
 
                 setIsLoading(false)
                 setPlay(false)
-            } catch(err) {
+            } catch (err) {
 
             }
-            
+
         }
 
         fetchMovie()
@@ -69,19 +71,35 @@ export default function SingleMovie() {
             } else {
                 dispatch(userSlice.actions.updateFailure(res.data))
             }
-        } catch(err) {
+        } catch (err) {
             dispatch(userSlice.actions.updateFailure("Error, please try again"))
         }
+    }
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (alertMessage) {
+                setAlertMessage("")
+            }
+        }, 2000)
+
+        return () => clearTimeout(timeout)
+    }, [alertMessage])
+
+    const handleShareMovie = () => {
+        // setAlertMessage("")
+        navigator.clipboard.writeText(window.location.href)
+        setAlertMessage("Copied the movie link")
     }
 
     return (
         <>
             {isloading ? <Loading /> :
-                <div 
+                <div
                     key={movieId}
                     className="single-movie"
                 >
-                    <div 
+                    <div
                         className="single-movie__overlay"
                         style={{
                             backgroundImage: `url('http://image.tmdb.org/t/p/w1280/${movie.backdrop_path}')`
@@ -90,27 +108,27 @@ export default function SingleMovie() {
                     </div>
                     <div className="row">
                         <div className="col c-o-1 c-10 m-o-0 m-12">
-                                {!play ? '' : 
-                                    <div className="single-movie__src">
-                                        <iframe 
-                                            id="iframe" 
-                                            src={"https://2embed.org/embed/movie?tmdb=" + movieId} 
-                                            title={movieId}
-                                            width="100%" 
-                                            height="100%" 
-                                            frameborder="0"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                }
+                            {!play ? '' :
+                                <div className="single-movie__src">
+                                    <iframe
+                                        id="iframe"
+                                        src={"https://2embed.org/embed/movie?tmdb=" + movieId}
+                                        title={movieId}
+                                        width="100%"
+                                        height="100%"
+                                        frameborder="0"
+                                        allowFullScreen
+                                    ></iframe>
+                                </div>
+                            }
                         </div>
 
                         {/* Ảnh của movie */}
                         <div className="col c-o-2 c-8 m-o-0 m-4 l-4">
-                            <img 
-                                className="single-movie__img" 
+                            <img
+                                className="single-movie__img"
                                 src={movie.poster_path && `http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                                alt="MovieImg"  
+                                alt="MovieImg"
                             />
                         </div>
 
@@ -122,17 +140,17 @@ export default function SingleMovie() {
                                     <span>Free</span>
                                 </div>
                                 <p className="single-movie__title">
-                                    { movie.title }
+                                    {movie.title}
                                 </p>
                                 <p className="single-movie__sub-title">
-                                    { movie.original_title }
+                                    {movie.original_title}
                                 </p>
                                 <ul className="single-movie__actions">
                                     <li className="single-movie__action">
                                         <i className="fas fa-star"></i>
-                                        <span>{ movie.vote_average }/10</span>
+                                        <span>{movie.vote_average}/10</span>
                                     </li>
-                                    <li className="single-movie__action">
+                                    <li className="single-movie__action" onClick={handleShareMovie}>
                                         <i className="fas fa-share-alt"></i>
                                         <span>Share</span>
                                     </li>
@@ -150,27 +168,27 @@ export default function SingleMovie() {
                                     </button>
 
                                     {/* Save Movie Btn */}
-                                    { !user && (
+                                    {!user && (
                                         <Link className="link" to="/login" target='_blank'>
                                             <button className="single-movie__btn single-movie__btn--save">
                                                 <i className="fas fa-save"></i>
                                                 Save
                                             </button>
                                         </Link>
-                                        ) 
+                                    )
                                     }
 
-                                    { user && !user.savedMovies.includes(movieId) && (
+                                    {user && !user.savedMovies.includes(movieId) && (
                                         <button className="single-movie__btn single-movie__btn--save" onClick={handleSaveMovie}>
                                             <i className="fas fa-save"></i>
                                             Save
                                         </button>
-                                    ) }
+                                    )}
 
-                                    
+
 
                                     {/* Has saved Movie Btn */}
-                                    { user && user.savedMovies.includes(movieId) && 
+                                    {user && user.savedMovies.includes(movieId) &&
                                         (<button className="single-movie__btn single-movie__btn--saved">
                                             <i className="fas fa-check"></i>
                                             Saved
@@ -184,15 +202,15 @@ export default function SingleMovie() {
                                             <ul className="single-movie__info-list">
                                                 <li className="single-movie__info-item">
                                                     <span>Status: </span>
-                                                    { movie.status }
+                                                    {movie.status}
                                                 </li>
                                                 <li className="single-movie__info-item">
                                                     <span>Duration: </span>
-                                                    { movie.runtime } minutes
+                                                    {movie.runtime} minutes
                                                 </li>
                                                 <li className="single-movie__info-item">
                                                     <span>Categories: </span>
-                                                    { movie.genres && 
+                                                    {movie.genres &&
                                                         movie.genres.map(genre => genre.name).join(', ')
                                                     }
                                                 </li>
@@ -202,13 +220,13 @@ export default function SingleMovie() {
                                             <ul className="single-movie__info-list">
                                                 <li className="single-movie__info-item">
                                                     <span>Country: </span>
-                                                    { movie.production_countries && 
+                                                    {movie.production_countries &&
                                                         (movie.production_countries.length > 0 ? movie.production_countries.at(-1).name : 'undefined')
                                                     }
                                                 </li>
                                                 <li className="single-movie__info-item">
                                                     <span>Release year: </span>
-                                                    { movie.release_date && movie.release_date.substring(0, 4) }
+                                                    {movie.release_date && movie.release_date.substring(0, 4)}
                                                 </li>
                                             </ul>
                                         </div>
@@ -230,9 +248,20 @@ export default function SingleMovie() {
                         </div>
 
                         <div className="col c-o-1 c-10 m-o-0 m-12">
-                            <MovieSimilar id={ movieId }/>
+                            <Comments movieId={movieId} user={user} />
+                        </div>
+
+                        <div className="col c-o-1 c-10 m-o-0 m-12">
+                            <MovieSimilar id={movieId} />
                         </div>
                     </div>
+
+                    {alertMessage && (
+                        <div className="single-movie__alert">
+                            {alertMessage}
+                        </div>
+                    )}
+
                 </div>
             }
         </>
