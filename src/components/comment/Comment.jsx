@@ -165,7 +165,7 @@ export default function Comment({ data, user, movieId, handleOpenDialog, setDele
                             <span>Reply</span>
                         </div>
                     )}
-                    {user._id === data.userId._id && (
+                    {user && user._id === data.userId._id && (
                         <div
                             className="comment__control"
                             onClick={() => handleSelectDelete(data._id)}

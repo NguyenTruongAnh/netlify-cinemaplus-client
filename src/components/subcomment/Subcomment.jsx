@@ -21,7 +21,7 @@ export default function Subcomment({ data, user, handleOpenDialog, setDeleteSubc
                     {data.content}
                 </p>
                 <div className="subcomment__controls">
-                    {user._id === data.userId._id && (
+                    {user && user._id === data.userId._id && (
                         <div className="subcomment__control" onClick={() => handleSelectDelete(data._id)}>
                             <i className="fa-solid fa-trash"></i>
                             <span>Delete</span>
