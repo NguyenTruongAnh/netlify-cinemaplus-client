@@ -1,5 +1,7 @@
-import './subcomment.css';
 import { formatTimeAgo } from '../../ultils/format'
+
+import './subcomment.css'
+import './subcommentResponsive.css'
 
 export default function Subcomment({ data, user, handleOpenDialog, setDeleteSubcommentId }) {
     const handleSelectDelete = (subcommentId) => {

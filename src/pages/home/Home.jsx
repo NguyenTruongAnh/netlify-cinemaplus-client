@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import HomeSlider from '../../components/homeSlider/HomeSlider'
 
-
 export default function Home() {
     const [genres, setGenres] = useState([])
     const [isLoading, setIsLoading] = useState(true)

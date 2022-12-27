@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import Subcomment from '../subcomment/Subcomment'
-import './comment.css'
+import { useState, useEffect, useCallback } from 'react'
 import { formatTimeAgo } from '../../ultils/format'
-import { useEffect } from 'react'
-import axios from 'axios'
-import { useCallback } from 'react'
+import Subcomment from '../subcomment/Subcomment'
 import AlertDialog from '../alertDialog/AlertDialog'
+import axios from 'axios'
+
+import './comment.css'
+import './commentResponsive.css'
 
 export default function Comment({ data, user, movieId, handleOpenDialog, setDeleteCommentId, handleReloadComment }) {
     const [openInput, setOpenInput] = useState(false)
